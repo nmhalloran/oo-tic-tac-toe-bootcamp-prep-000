@@ -38,31 +38,31 @@ class TicTacToe
     index.between?(0,8) && !position_taken?(index)
   end
 
-  def won?
+  def won?(board)
     WIN_COMBINATIONS.detect do |combo|
-      combo[0] == combo[1] &&
-      combo[1] == combo[2] &&
+      board[combo[0]] == board[combo[1]] &&
+      board[combo[1]] == board[combo[2]] &&
       position_taken?(combo[0])
     end
   end
 
-  def full?(board)
+  def full?
     board.all?{|token| token == "X" || token == "O"}
   end
 
-  def draw?(board)
-    !won?(board) && full?(board)
+  def draw?
+    !won? && full?
   end
 
-  def over?(board)
-    won?(board) || draw?(board)
+  def over?
+    won? || draw?
   end
 
   def input_to_index(user_input)
     user_input.to_i - 1
   end
 
-  def turn(board)
+  def turn
     puts "Please enter 1-9:"
     user_input = gets.strip
     index = input_to_index(user_input)
@@ -74,7 +74,7 @@ class TicTacToe
     end
   end
 
-  def position_taken?(board, index)
+  def position_taken?(index)
     board[index]== "X" || board[index] == "O"
   end
 
