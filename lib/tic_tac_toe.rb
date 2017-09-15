@@ -15,18 +15,18 @@ class TicTacToe
     [6,4,2]
   ]
 
-  def play(board)
-    while !over?(board)
-      turn(board)
+  def play
+    while !over?
+      turn
     end
-    if won?(board)
+    if won?
       puts "Congratulations #{winner(board)}!"
-    elsif draw?(board)
+    elsif draw?
       puts "Cat's Game!"
     end
   end
 
-  def display_board(board)
+  def display_board
     puts " #{board[0]} | #{board[1]} | #{board[2]} "
     puts "-----------"
     puts " #{board[3]} | #{board[4]} | #{board[5]} "
@@ -34,15 +34,15 @@ class TicTacToe
     puts " #{board[6]} | #{board[7]} | #{board[8]} "
   end
 
-  def valid_move?(board, index)
-    index.between?(0,8) && !position_taken?(board, index)
+  def valid_move?(index)
+    index.between?(0,8) && !position_taken?(index)
   end
 
-  def won?(board)
+  def won?
     WIN_COMBINATIONS.detect do |combo|
-      board[combo[0]] == board[combo[1]] &&
-      board[combo[1]] == board[combo[2]] &&
-      position_taken?(board, combo[0])
+      combo[0] == combo[1] &&
+      combo[1] == combo[2] &&
+      position_taken?(combo[0])
     end
   end
 
